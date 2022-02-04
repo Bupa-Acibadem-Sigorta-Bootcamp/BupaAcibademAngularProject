@@ -1,0 +1,84 @@
+<div class="d-flex content-center mt-5">
+  <div
+    style="
+      width: 100%;
+      height: 100%;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 13pt;
+    "
+  >
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="col-sm-2">
+        <label
+          for="amount"
+          class="form-label d-flex justify-content-center align-items-center"
+          >Miktar Giriniz!</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="amount"
+          placeholder=""
+          required=""
+          [(ngModel)]="amount"
+        />
+        <br />
+        <label
+          for="state"
+          class="form-label d-flex justify-content-center align-items-center"
+          >Döviz Tipi!</label
+        >
+        <select
+          class="form-select"
+          id="currency"
+          required=""
+          [(ngModel)]="currentCurrency"
+        >
+          <ng-container *ngFor="let currency of currencies">
+            <option
+              *ngIf="currency.currencyCode"
+              [value]="currency.currencyCode"
+            >
+              {{ currency.currencyCode }} - {{ currency.currencyName }}
+            </option>
+          </ng-container>
+        </select>
+        <br />
+        <label
+          for="state"
+          class="form-label d-flex justify-content-center align-items-center"
+          >Dönüştürülecek Birim!</label
+        >
+        <select
+          class="form-select"
+          id="state"
+          required=""
+          [(ngModel)]="targetCurrency"
+        >
+          <ng-container *ngFor="let currency of currencies">
+            <option
+              *ngIf="currency.currencyCode"
+              [selected]="currency.currencyCode == 'TRY'"
+              [value]="currency.currencyCode"
+            >
+              {{ currency.currencyCode }} - {{ currency.currencyName }}
+            </option>
+          </ng-container>
+        </select>
+        <br />
+        <button
+          type="button"
+          class="btn btn-outline-success d-grid gap-2 col-12 mx-auto"
+          (click)="convertCurrency()"
+        >
+          Çevir
+        </button>
+        <br />
+        <br />
+        <div class="d-flex justify-content-center align-items-center">
+          {{ resultMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
